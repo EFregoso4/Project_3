@@ -1,33 +1,29 @@
-// Define an array with the YouTube video URLs you want to use in the slider
-const videos = [
-  "https://www.youtube.com/embed/4QIZE708gJ4",
-  "https://www.youtube.com/embed/kPa7bsKwL-c",
-  "https://www.youtube.com/embed/RcWOWgy86o8"
+// JavaScript for the Video Slider functionality
+const videoSlider = document.getElementById('slider-video');
+const prevButton = document.getElementById('prev');
+const nextButton = document.getElementById('next');
+
+const videoList = [
+  "https://www.youtube.com/embed/4QIZE708gJ4", // Video 1
+  "https://www.youtube.com/embed/kPa7bsKwL-c", // Video 2
+  "https://www.youtube.com/embed/RcWOWgy86o8"  // Video 3
 ];
-let currentVideoIndex = 0;
 
-// Get the HTML elements for the slider
-const sliderVideo = document.getElementById("slider-video");
-const prevButton = document.getElementById("prev");
-const nextButton = document.getElementById("next");
+let currentIndex = 0;
 
-// Function to update the iframe src with the new video URL
+// Function to change video based on index
 function updateVideo() {
-  sliderVideo.src = videos[currentVideoIndex];
+  videoSlider.src = videoList[currentIndex];
 }
 
-// Function to show the previous video
-function showPreviousVideo() {
-  currentVideoIndex = (currentVideoIndex === 0) ? videos.length - 1 : currentVideoIndex - 1;
+// Event listener for the "Previous" button
+prevButton.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + videoList.length) % videoList.length; // Loop back to the last video
   updateVideo();
-}
+});
 
-// Function to show the next video
-function showNextVideo() {
-  currentVideoIndex = (currentVideoIndex === videos.length - 1) ? 0 : currentVideoIndex + 1;
+// Event listener for the "Next" button
+nextButton.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % videoList.length; // Loop back to the first video
   updateVideo();
-}
-
-// Add event listeners to buttons
-prevButton.addEventListener("click", showPreviousVideo);
-nextButton.addEventListener("click", showNextVideo);
+});
