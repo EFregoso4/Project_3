@@ -6,6 +6,7 @@
   <title>Music</title>
   <link rel="stylesheet" href="css/reset.css"> 
   <link rel="stylesheet" href="css/style.css"> 
+  <script src="js/final_script.js" defer></script> <!-- Updated path to the JavaScript file -->
 </head>
 
 <body>
@@ -55,6 +56,19 @@
           </iframe>
         </li>
       </ul>
+    </section>
+
+    <!-- Video Slider Section -->
+    <section>
+      <h2>Featured Videos</h2>
+      <div id="video-slider">
+        <video id="slider-video" width="640" height="360" controls>
+          <source id="video-source" src="video1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+      </div>
     </section>
   </main>
 
