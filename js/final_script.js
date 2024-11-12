@@ -4,17 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const totalImages = images.length;
 
   function showNextImage() {
-    // Hide all images
-    images.forEach(image => image.style.display = 'none');
-    
-    // Show the current image
-    currentIndex = (currentIndex + 1) % totalImages; // Wrap around using modulus
-    images[currentIndex].style.display = 'block';
+    images.forEach(image => image.style.display = 'none'); // Hide all images
+    currentIndex = (currentIndex + 1) % totalImages; // Cycle through images
+    images[currentIndex].style.display = 'block'; // Show next image
   }
 
-  // Show the first image initially
-  images[currentIndex].style.display = 'block';
-
-  // Change the image every 3 seconds
-  setInterval(showNextImage, 3000);
+  setInterval(showNextImage, 3000); // Change image every 3 seconds
 });
