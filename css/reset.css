@@ -1,0 +1,74 @@
+/* Resetting padding, margin, and box-sizing across all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensuring body and html are full height */
+html,
+body {
+    height: 100%;
+    line-height: 1.5;
+    font-family: Arial, sans-serif; /* Optional default font */
+}
+
+/* Resetting image and media elements to be responsive */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Resetting list styles */
+ul,
+ol {
+    list-style-type: none;
+}
+
+/* Resetting form elements to inherit font properties */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Removing border and background from buttons */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Removing text decoration and color inheritance for links */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Removing table borders and spacing */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Resetting heading font sizes */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: inherit;
+    line-height: 1.1;
+}
+
+/* Setting iframe elements to responsive */
+iframe {
+    max-width: 100%;
+    border: none;
+}
+

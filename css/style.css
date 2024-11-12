@@ -1,0 +1,103 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
+}
+
+header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    color: #fff;
+    padding: 20px 0; /* Increased padding for a bolder look */
+}
+
+nav {
+    text-align: center; /* Center the navigation bar */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Remove default margin for the ul */
+}
+
+nav ul li {
+    display: inline-block; /* Use inline-block for better spacing control */
+    margin: 0 30px; /* Increased margin between links */
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold; /* Bold font for links */
+    font-size: 1.1em; /* Slightly larger font size */
+    transition: color 0.3s ease, transform 0.2s; /* Smooth transition for hover effect */
+}
+
+nav ul li a:hover {
+    color: #ffeb3b; /* Bright color on hover */
+    transform: scale(1.05); /* Slightly enlarge the text on hover */
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 20px 0;
+    text-transform: uppercase; /* Uppercase for headings */
+    letter-spacing: 2px; /* Space between letters for a classy look */
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff; /* White background for the main content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    margin: 20px 0;
+    border: 1px solid #ccc; /* Light border for separation */
+    border-radius: 5px;
+    padding: 15px; /* Increased padding */
+    background-color: #f9f9f9; /* Soft background for song entries */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transition effects */
+}
+
+ul li:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.song-title {
+    font-weight: bold;
+    font-size: 1.2em; /* Larger font for song titles */
+    color: #6a11cb; /* Color for song titles */
+}
+
+.artist-name {
+    font-style: italic;
+    color: #555; /* Darker shade for artist names */
+}
+
+iframe {
+    display: block;
+    margin: 10px auto;
+    width: 100%; /* Ensure the video takes full width */
+    max-width: 560px; /* Constrain the maximum width */
+    height: 315px; /* Maintain a good aspect ratio */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border for cleaner look */
+    transition: transform 0.2s; /* Transition for scaling effect */
+}
+
+iframe:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
