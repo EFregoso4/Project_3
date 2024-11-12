@@ -1,39 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/reset.css"> <!-- Link to the reset CSS -->
-  <link rel="stylesheet" href="css/style.css"> <!-- Link to the main CSS -->
-  <script src="js/script.js" defer></script> <!-- Link to the external JavaScript file -->
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js"></script> 
+  <title>Project 3 Luis Zetina</title>
 </head>
-
-<body>
-  <header>
+<body id='mapbody'>
+  <header id='mapheader'>
+    <h3>Pages</h3>
     <nav>
       <ul>
-        <li><a href="index.html" title="Introduction">Introduction</a></li>
-        <li><a href="resume.html" title="Resume">Resume</a></li>
-        <li><a href="video_profile.html" title="Music">Music</a></li>
-		<li><a href="google_maps.html" title="Googlemaps">googlemaps</a></li>
+        <li><a href="index.html">Resume</a></li>
+        <li><a href="yugioh_tutorial.html">Yugioh Tutorial</a></li>
+        <li><a href="collection.html">Item Collecting</a></li>
+        <li><a href="maps.html">Google Maps</a></li>
       </ul>
     </nav>
   </header>
-
-  <main>
-    <section>
-      <h1>Google Map with Features</h1>
-      <div id="googleMap"></div> <!-- Map container -->
-    </section>
-
-    <section>
-      <h3>Features of the Map</h3>
-      <ul>
-        <li>A marker placed at the Illinois Institute of Technology (IIT) location.</li>
-        <li>An info window that appears when the marker is clicked.</li>
-        <li>A polyline connecting a few key points representing a route/path.</li>
-      </ul>
-    </section>
+  <main id = 'mapmain'>
+    <p>The map below shows some of personal favorite places to shop for manga, cards and plushies.</p>
   </main>
+  <div class="wrapper">
+    <div id="map"></div>
+  </div>
+  <script>
+    async function googleMap() {
+      const { ColorScheme } = await google.maps.importLibrary("core");
+      const store1coord = {lat: 41.82442356309825, lng: -87.80063360794283};
+      const store2coord = {lat: 41.88451539272778, lng: -87.625314836063};
+      const store3coord = {lat: 41.88060504715383, lng:-87.62660949128134};
+
+      const showmap = new google.maps.Map(document.getElementById("map"), {
+        center: store1coord,
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        colorScheme: ColorScheme.DARK
+      });
+
+      const marker = new google.maps.Marker({
+        position: store1coord,
+        map: showmap,
+        Animation: google.maps.Animation.DROP,
+        title: "Top Cut Comics",
+      });
+
+      const marker2 = new google.maps.Marker({
+        position: store2coord,
+        map: showmap,
+        Animation: google.maps.Animation.DROP,
+        title: "Graham Cracker Comics",
+      });
+
+      const marker3 = new google.maps.Marker({
+        position: store3coord,
+        map:showmap,
+        Animation: google.maps.Animation.DROP,
+        title: "Barnes and Noble (Depaul)"
+      })
+
+      const TCCinfo = new google.maps.InfoWindow({
+        content: `
+          <div class="content" style="color: black;">
+            <h1>Top Cut Comics</h1>
+            <h3>This is my personal favorite place to shop, it is full of comics, figures, plushies, cards and manga and the community is very friendly.</h3>
+          </div>
+        `,
+      });
+
+      const GCCinfo = new google.maps.InfoWindow({
+        content: `
+          <div class="content" style="color: black;">
+            <h1>Graham Cracker Comics</h1>
+            <h3>I don't go to this one as much, but their community is super fun and I really like their selection of figures in particular.</h3>
+          </div>
+        `,
+      });
+
+      const BNinfo = new google.maps.InfoWindow({
+        content:`
+          <div class="content" style="color: black;">
+            <h1>Barnes and Noble</h1>
+            <h3>This place is the one I go to the least, the only times I go is just to look at theit manga section.</h3>
+          </div>
+        `,
+      })
+
+      marker.addListener("mouseover", function () {
+        TCCinfo.open(showmap, marker);
+      });
+
+      marker2.addListener("mouseover", function() {
+        GCCinfo.open(showmap, marker2);
+      });
+
+      marker3.addListener("mouseover", function() {
+        BNinfo.open(showmap,marker3);
+      });
+
+      marker.addListener("mouseout", function () {
+        TCCinfo.close();
+        GCCinfo.close();
+        BNinfo.close();
+      });
+      
+      marker2.addListener("mouseout", function () {
+        GCCinfo.close();
+      });
+
+      marker3.addListener("mouseout", function () {
+        BNinfo.close();
+      });
+
+      marker.addListener("click", function() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        } 
+      });
+
+      marker2.addListener("click", function() {
+        if (marker2.getAnimation() !== null) {
+          marker2.setAnimation(null);
+        } else {
+          marker2.setAnimation(google.maps.Animation.BOUNCE);
+        } 
+      });
+
+      marker3.addListener("click", function() {
+        if (marker3.getAnimation() !== null) {
+          marker3.setAnimation(null);
+        } else {
+          marker3.setAnimation(google.maps.Animation.BOUNCE);
+        } 
+      });
+
+    }
+    
+    
+  </script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbSMloSHOTae2B9IWNE_AbVq_gzg6JUrE&callback=googleMap"></script>
 </body>
 </html>
