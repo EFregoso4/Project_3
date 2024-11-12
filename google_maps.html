@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Leaflet Map - Extra Features</title>
+  <title>Interactive Leaflet Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/css/style.css">
-  <style>
-    /* You can add custom styles here */
-  </style>
 </head>
 <body class="map">
 
@@ -17,32 +14,32 @@
     <ul>
       <li><a href="index.html">Homepage</a></li>
       <li><a href="resume.html">Resume</a></li>
-      <li><a href="video_profile.html">music</a></li>
-      <li><a href="map.html">map</a></li>
+      <li><a href="video_profile.html">Music</a></li>
+      <li><a href="map.html">Map</a></li>
     </ul>
   </nav>
 
-  <div id="map" style="height: 500px; width: 100%;"></div>
+  <div id="map"></div>
 
   <!-- Leaflet JS library -->
   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
   <script>
-    // Initialize the map
-    const map = L.map('map').setView([41.85003, -87.65005], 12);  // Chicago coordinates
+    // Initialize the map centered on Chicago coordinates
+    const map = L.map('map').setView([41.85003, -87.65005], 12);
 
-    // Add OpenStreetMap tiles
+    // Add OpenStreetMap tiles as the base layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Feature 1: Add a marker
+    // Create a marker at Chicago's coordinates
     const marker = L.marker([41.85003, -87.65005]).addTo(map);
 
-    // Feature 2: Add a popup (info window)
+    // Bind a popup to the marker
     marker.bindPopup("<h3>Chicago</h3><p>Chicago, Illinois! I have lived here my whole life.</p>").openPopup();
 
-    // Feature 3: Add a custom control button
+    // Feature: Custom Control button to center the map on the marker
     L.Control.CenterButton = L.Control.extend({
       onAdd: function() {
         const btn = L.DomUtil.create('div', 'custom-control');
@@ -52,11 +49,16 @@
       }
     });
 
-    // Add the custom control to the map
+    // Add custom control button to the top-right of the map
     L.control.centerButton = function(opts) {
       return new L.Control.CenterButton(opts);
     };
     L.control.centerButton({ position: 'topright' }).addTo(map);
+
+    // Feature: Zoom into marker on click
+    marker.on('click', function() {
+      map.setView(marker.getLatLng(), 14);  // Zoom to level 14 on click
+    });
   </script>
 </body>
 </html>
