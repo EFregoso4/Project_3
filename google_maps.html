@@ -1,63 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Interactive Chicago Map</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to the separate CSS file -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
-</head>
-<body>
+<!-- Leaflet JS library -->
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
+<script>
+  // Initialize the map centered on Chicago coordinates
+  const map = L.map('map').setView([41.85003, -87.65005], 12);  // Chicago coordinates
 
-  <h3>Click links below to search the website</h3>
-  <nav>
-    <ul>
-      <li><a href="index.html">Homepage</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="video_profile.html">Music</a></li>
-      <li><a href="map.html">Map</a></li>
-    </ul>
-  </nav>
+  // Add OpenStreetMap tiles as the base layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-  <div id="map"></div>
+  // Create a marker at Chicago's coordinates
+  const marker = L.marker([41.85003, -87.65005], {
+    icon: L.icon({
+      iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Map_marker_icon_%28location%29.svg/1024px-Map_marker_icon_%28location%29.svg.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    })
+  }).addTo(map);
 
-  <!-- Leaflet JS library -->
-  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
-  <script>
-    // Initialize the map centered on Chicago coordinates
-    const map = L.map('map').setView([41.85003, -87.65005], 12); // Chicago coordinates
+  // Bind a custom popup to the marker
+  marker.bindPopup(`
+    <h3 style="color: #ff6347;">Chicago</h3>
+    <p><strong>The Windy City</strong> - A bustling metropolis on the shores of Lake Michigan. Known for its stunning architecture, deep-dish pizza, and iconic skyline!</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Chicago_Skyline.jpg" alt="Chicago Skyline" style="width: 100%; border-radius: 8px;">
+  `);
 
-    // Add OpenStreetMap tiles as the base layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+  // Add a custom control button to center the map on the marker with a smooth transition effect
+  L.Control.CenterButton = L.Control.extend({
+    onAdd: function() {
+      const btn = L.DomUtil.create('div', 'custom-control');
+      btn.innerHTML = 'Focus on Chicago!';
+      btn.style.backgroundColor = '#007bff';
+      btn.style.color = 'white';
+      btn.style.padding = '10px 20px';
+      btn.style.borderRadius = '5px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontWeight = 'bold';
+      btn.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+      btn.onclick = () => {
+        map.flyTo(marker.getLatLng(), 14, { animate: true, duration: 2 });
+      };
+      return btn;
+    }
+  });
 
-    // Create a marker at Chicago's coordinates
-    const marker = L.marker([41.85003, -87.65005]).addTo(map);
+  // Add the custom control to the map at the top-right corner
+  L.control.centerButton = function(opts) {
+    return new L.Control.CenterButton(opts);
+  };
+  L.control.centerButton({ position: 'topright' }).addTo(map);
 
-    // Bind a popup to the marker
-    marker.bindPopup("<h3>Chicago</h3><p>Chicago, Illinois! I have lived here my whole life.</p>").openPopup();
-
-    // Feature: Custom Control button to center the map on the marker
-    L.Control.CenterButton = L.Control.extend({
-      onAdd: function() {
-        const btn = L.DomUtil.create('div', 'custom-control');
-        btn.innerHTML = 'Center Map on Marker';
-        btn.onclick = () => map.setView(marker.getLatLng(), 12);
-        return btn;
-      }
-    });
-
-    // Add the custom control button to the top-right of the map
-    L.control.centerButton = function(opts) {
-      return new L.Control.CenterButton(opts);
-    };
-    L.control.centerButton({ position: 'topright' }).addTo(map);
-
-    // Feature: Zoom into marker on click
-    marker.on('click', function() {
-      map.setView(marker.getLatLng(), 14);  // Zoom to level 14 on click
-    });
-  </script>
-</body>
-</html>
+  // Add zoom functionality: when the marker is clicked, zoom in with a smooth animation
+  marker.on('click', function() {
+    map.flyTo(marker.getLatLng(), 14, { animate: true, duration: 1.5 });
+  });
+</script>
