@@ -1,29 +1,24 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Leaflet Map - Extra Features</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/indexstylesheet.css">
+  <link rel="stylesheet" href="css/css/style.css">
   <style>
-    /* Remove styles for img elements on this page */
-    img {
-      border: none;
-      box-shadow: none;
-    }
+    /* You can add custom styles here */
   </style>
 </head>
 <body class="map">
 
-  <h1>Leo Johnson's Website</h1>
   <h3>Click links below to search the website</h3>
   <nav>
     <ul>
       <li><a href="index.html">Homepage</a></li>
       <li><a href="resume.html">Resume</a></li>
-      <li><a href="videogame.html">Games</a></li>
-      <li><a href="map.html">Map</a></li>
+      <li><a href="video_profile.html">music</a></li>
+      <li><a href="map.html">map</a></li>
     </ul>
   </nav>
 
@@ -45,7 +40,7 @@
     const marker = L.marker([41.85003, -87.65005]).addTo(map);
 
     // Feature 2: Add a popup (info window)
-    marker.bindPopup("<h3>Chicago</h3><p>The Windy City!</p>").openPopup();
+    marker.bindPopup("<h3>Chicago</h3><p>Chicago, Illinois! I have lived here my whole life.</p>").openPopup();
 
     // Feature 3: Add a custom control button
     L.Control.CenterButton = L.Control.extend({
