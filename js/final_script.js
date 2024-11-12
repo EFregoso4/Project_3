@@ -1,29 +1,27 @@
-// JavaScript for the Video Slider functionality
-const videoSlider = document.getElementById('slider-video');
-const prevButton = document.getElementById('prev');
-const nextButton = document.getElementById('next');
+// script.js
 
-const videoList = [
-  "https://www.youtube.com/embed/4QIZE708gJ4", // Video 1
-  "https://www.youtube.com/embed/kPa7bsKwL-c", // Video 2
-  "https://www.youtube.com/embed/RcWOWgy86o8"  // Video 3
-];
+// Function to initialize the image slider
+function initSlider() {
+  let currentIndex = 0;
+  const images = document.querySelectorAll('.slider img');
+  const totalImages = images.length;
 
-let currentIndex = 0;
+  // Show the first image and hide others
+  images[currentIndex].style.display = 'block';
+  for (let i = 1; i < totalImages; i++) {
+    images[i].style.display = 'none';
+  }
 
-// Function to change video based on index
-function updateVideo() {
-  videoSlider.src = videoList[currentIndex];
+  // Function to change the image
+  function changeImage() {
+    images[currentIndex].style.display = 'none'; // Hide current image
+    currentIndex = (currentIndex + 1) % totalImages; // Loop to the first image after the last
+    images[currentIndex].style.display = 'block'; // Show next image
+  }
+
+  // Set the interval for automatic image change (3 seconds)
+  setInterval(changeImage, 3000);
 }
 
-// Event listener for the "Previous" button
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + videoList.length) % videoList.length; // Loop back to the last video
-  updateVideo();
-});
-
-// Event listener for the "Next" button
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % videoList.length; // Loop back to the first video
-  updateVideo();
-});
+// Run the slider initialization when the page is loaded
+window.onload = initSlider;
