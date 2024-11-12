@@ -4,14 +4,11 @@
   <meta charset="utf-8">
   <title>Interactive Chicago Map</title>
   <link rel="stylesheet" href="styles.css"> <!-- Link to the separate CSS file -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
 </head>
 <body>
 
-  <header>
-    Interactive Chicago Map Example
-  </header>
-
+  <h3>Click links below to search the website</h3>
   <nav>
     <ul>
       <li><a href="index.html">Homepage</a></li>
@@ -35,43 +32,32 @@
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Create a custom marker with a custom icon for Chicago
-    const markerIcon = L.icon({
-      iconUrl: 'https://example.com/custom-marker-icon.png',  // Replace with actual icon URL
-      iconSize: [40, 40],  // Size of the icon
-      iconAnchor: [20, 40],  // Adjust anchor point for marker
-      popupAnchor: [0, -40]  // Adjust popup position
-    });
+    // Create a marker at Chicago's coordinates
+    const marker = L.marker([41.85003, -87.65005]).addTo(map);
 
-    // Place the custom marker at Chicago's coordinates
-    const marker = L.marker([41.85003, -87.65005], { icon: markerIcon }).addTo(map);
+    // Bind a popup to the marker
+    marker.bindPopup("<h3>Chicago</h3><p>Chicago, Illinois! I have lived here my whole life.</p>").openPopup();
 
-    // Create a custom popup with more content for Chicago
-    marker.bindPopup(`
-      <h3>Chicago</h3>
-      <p><strong>Population:</strong> 2.7 million</p>
-      <p><strong>Famous For:</strong> Millennium Park, The Bean, Chicago-style pizza</p>
-      <a href="https://www.choosechicago.com/" target="_blank" class="button">Explore Chicago</a>
-    `).openPopup();
-
-    // Custom Control Button to center the map on the marker
+    // Feature: Custom Control button to center the map on the marker
     L.Control.CenterButton = L.Control.extend({
       onAdd: function() {
         const btn = L.DomUtil.create('div', 'custom-control');
-        btn.innerHTML = '<i class="fas fa-crosshairs"></i> Center on Marker';
+        btn.innerHTML = 'Center Map on Marker';
         btn.onclick = () => map.setView(marker.getLatLng(), 12);
         return btn;
       }
     });
 
-    // Add the custom control button to the map
+    // Add the custom control button to the top-right of the map
+    L.control.centerButton = function(opts) {
+      return new L.Control.CenterButton(opts);
+    };
     L.control.centerButton({ position: 'topright' }).addTo(map);
 
-    // Event listener: Zoom into the marker when clicked
+    // Feature: Zoom into marker on click
     marker.on('click', function() {
-      map.setView(marker.getLatLng(), 14);
+      map.setView(marker.getLatLng(), 14);  // Zoom to level 14 on click
     });
   </script>
 </body>
 </html>
-
