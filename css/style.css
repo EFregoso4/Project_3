@@ -136,3 +136,24 @@ iframe:hover {
         width: 100%;
     }
 }
+
+/* Custom Styles for Map */
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+/* Style for the custom button */
+.custom-control {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.custom-control:hover {
+    background-color: #0056b3;
+}
