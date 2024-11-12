@@ -101,3 +101,38 @@ iframe {
 iframe:hover {
     transform: scale(1.05); /* Slight zoom on hover */
 }
+
+/* Picture Slider Styles */
+.slider {
+    position: relative;
+    width: 100%; /* Make the slider container take full width */
+    max-width: 800px; /* Restrict max width to match the main content */
+    margin: auto;
+    overflow: hidden; /* Hide overflow to make the transition smooth */
+}
+
+.slider img {
+    width: 100%; /* Ensure the images fill the container */
+    height: auto; /* Maintain the aspect ratio */
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none; /* Initially hide all images */
+    transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
+}
+
+/* Display the first image initially */
+.slider img:first-child {
+    display: block;
+}
+
+/* Ensure the images are responsive and scale correctly */
+@media (max-width: 768px) {
+    .slider {
+        max-width: 100%; /* Full width for smaller screens */
+    }
+
+    .slider img {
+        width: 100%;
+    }
+}
