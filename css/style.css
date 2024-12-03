@@ -1,4 +1,4 @@
-/* General Styles */
+/* General Styles - Mobile First */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -127,33 +127,53 @@ iframe:hover {
 }
 
 /* Ensure the images are responsive and scale correctly */
-@media (max-width: 768px) {
+@media (min-width: 600px) {
+    /* Mid-width media query for small tablets or large phones in landscape mode */
+    header {
+        padding: 30px 0; /* Increase header padding for larger screens */
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 0 20px; /* Reduce space between links */
+    }
+
     .slider {
-        max-width: 100%; /* Full width for smaller screens */
+        max-width: 90%; /* Slightly reduce slider width */
     }
 
     .slider img {
-        width: 100%;
+        width: 100%; /* Ensure the images still fill the container */
     }
 }
 
-/* Custom Styles for Map */
-#map {
-    height: 500px;
-    width: 100%;
-}
+@media (min-width: 768px) {
+    /* Mid-width media query for tablets in portrait mode or smaller laptops */
+    main {
+        padding: 30px;
+    }
 
-/* Style for the custom button */
-.custom-control {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}
+    header {
+        padding: 40px 0; /* Larger header padding */
+    }
 
-.custom-control:hover {
-    background-color: #0056b3;
+    nav ul li {
+        margin: 0 25px; /* Increase space between links */
+    }
+
+    .slider {
+        max-width: 100%; /* Make the slider fill the entire width */
+    }
+
+    .slider img {
+        width: 100%; /* Ensure images continue to fill the container */
+    }
+
+    iframe {
+        width: 80%; /* Constrain iframe width for better layout on larger screens */
+    }
 }
